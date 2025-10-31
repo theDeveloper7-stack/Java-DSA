@@ -3,9 +3,7 @@ package LeetCode;
 public class LeetCode_1295 {
     public static int count(int n) {
         int ct = 0;
-//        int rem = 0;
         while(n>0){
-//            rem = n%10;
             n = n /  10;
             ct++;
         }
