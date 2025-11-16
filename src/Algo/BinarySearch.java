@@ -122,10 +122,48 @@ public class BinarySearch {
     }
 
     //......................................................................
+    public static int binarySearchInRange(int[] arr, int target, int start, int end){
+        while(start <= end){
+            int mid = start + (end - start)/2;
+            // integer has a fixed size
+            // if there is a large value foe start and end then it exceeds the range
+            if(target < arr[mid]){
+                end = mid - 1;
+            }
+            else if(target > arr[mid]){
+                start = mid + 1;
+            }
+            else{
+                return mid;
+            }
+            // If the array is in descending order then the condition statement will be reversed.
+        }
+        return -1;
+    }
+    //......................................................................
+    // find an element in an infinite sorted array
+    public static int searchInInfiniteArray(int[] arr, int target){
+        // here the problem is we can not use the array.length, because we are assuming it's an infinite array.
+        // In this case we have to search from small chunks.(the chunk should be increased by doubling the size)
+        // Apply binary search in every chunk.
+        int start = 0;
+        int end = 1;
+
+        while (target > arr[end]){
+            // This is the condition for the target to lay int the range.
+            int newStart = end + 1;
+            end = end + (end - start + 1) * 2;
+            // doubling the end index at every iteration.
+            start = newStart;
+        }
+        return binarySearchInRange(arr,target,start,end);
+    }
+    //......................................................................
 
     public static void main(String[] args) {
         int[] sortedArray = {10, 20, 30, 40, 50, 60, 70, 80, 90};
         int[] descArray = {90,80,50,40,20,10};
+        int[] longArray = {10,30,50,70,80,100,400,600,700,1000,30000,700000};
         int index = binarySearch(sortedArray, 40);
         System.out.println("The target element is at index: " + index);
         int index2 = orderedBinarySearch(descArray,90);
@@ -134,5 +172,7 @@ public class BinarySearch {
         System.out.println("The celling number is at index: " + cellingIndex);
         int floorIndex = floorNumber(sortedArray, 55);
         System.out.println("The floor number is at index: " + floorIndex);
+        int index3 = searchInInfiniteArray(longArray, 70);
+        System.out.println("The target element is at index: " + index3);
     }
 }
