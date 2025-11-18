@@ -56,6 +56,48 @@ public class LeetCode_33 {
         }
         return -1;
     }
+    //................................................................................
+    public static int findPivotWithDuplicate(int[] arr){
+        int start = 0;
+        int end  = arr.length - 1;
+        while(start <= end){
+            int mid = start + (end-start) / 2;
+            if ((mid < end) && (arr[mid] > arr[mid+1])){
+                return mid;
+            }
+            else if((mid > start) && (arr[mid] < arr[mid-1])){
+                return mid - 1;
+            }
+            // if the start, middle and end elements are same
+            if((arr[mid] == arr[start]) && (arr[mid] == arr[end])){
+                if(arr[start] > arr[start + 1]){
+                    return start;
+                }
+                start++;
+                if(arr[end] < arr[end - 1]){
+                    return end;
+                }
+                end--;
+            } else if ((arr[start] < arr[mid]) || (arr[start] == arr[mid] && arr[mid] > arr[end])) {
+                start = mid + 1;
+            }
+            else{
+                end = mid - 1;
+            }
+        }
+        return -1;
+    }
+    //................................................................................
+    public static int countRotation(int[] arr){
+        int count = 0;
+        int pivot = findPivot(arr);
+        if(pivot < arr.length){
+            count = pivot + 1;
+            return count;
+        }
+        return 0;
+    }
+    //................................................................................
     public static int pivotBinarySearch(int[] arr,int target){
         int pivot = findPivot(arr);
         if(pivot == -1){
@@ -75,7 +117,9 @@ public class LeetCode_33 {
     public static void main(String[] args) {
         int[] arr = {4,5,6,7,0,1,2};
         int[] arr2 = {3,5,1};
+        int[] arr3 = {2,9,2,2,2};
         int index = pivotBinarySearch(arr2,3);
         System.out.println(index);
+        System.out.println(countRotation(arr2));
     }
 }
