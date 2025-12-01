@@ -67,6 +67,65 @@ public class PatternQuesitons {
         }
     }
     //...............................................................................
+    public static void pattern_5(int n){
+        for (int row = 0; row < 2*n; row++) {
+            int totalColsInRow = row > n ? 2 * n - row : row;
+            for (int col = 0; col < totalColsInRow; col++) {
+                System.out.print("* ");
+            }
+            System.out.println();
+        }
+    }
+    //...............................................................................
+    public static void pattern_6(int n){
+        for (int row = 0; row < 2*n ; row++) {
+            int totalColsInRow = row > n ? 2 * n - row : row;
+            int noOfSpaces = n - totalColsInRow;
+
+            for (int space = 0; space < noOfSpaces; space++) {
+                System.out.print(" ");
+            }
+            for (int col = 0; col < totalColsInRow; col++) {
+                System.out.print("* ");
+            }
+            System.out.println();
+        }
+    }
+    //...............................................................................
+    public static void pattern_7(int n){
+        for (int row = 1; row <= n; row++) {
+            for (int spaces = 0; spaces < n - row; spaces++) {
+                System.out.print("  ");
+            }
+            for (int col = row; col >= 1; col--) {
+                System.out.print(col+ " ");
+            }
+            for (int col = 2; col <= row; col++) {
+                System.out.print(col+ " ");
+            }
+            System.out.println();
+        }
+    }
+    //...............................................................................
+    public static void pattern_8(int n){
+        /*
+        4 4 4 4 4
+        4 3 3 3 4
+        4 3 2 3 4
+        4 3 3 3 4
+        4 4 4 4 4
+         */
+        n = 2 * n;
+        for (int row = 0; row <= n; row++) {
+            for (int col = 0; col <=n ; col++) {
+                int atEveryIndex = n - Math.min(Math.min(row, col), Math.min(n - row, n - col));
+                System.out.print(atEveryIndex+ " ");
+            }
+            System.out.println();
+        }
+    }
+    //...............................................................................
+
 
     public static void main(String[] args) {
         System.out.println("Pattern 1 : ");
@@ -75,9 +134,23 @@ public class PatternQuesitons {
         System.out.println("Pattern 2 : ");
         pattern_2(4);
         System.out.println(".............................................");
+        System.out.println("Pattern 3 : ");
         pattern_3(5);
         System.out.println(".............................................");
+        System.out.println("Pattern 4 : ");
         pattern_4(5);
+        System.out.println(".............................................");
+        System.out.println("Pattern 5 : ");
+        pattern_5(5);
+        System.out.println(".............................................");
+        System.out.println("Pattern 6 : ");
+        pattern_6(5);
+        System.out.println(".............................................");
+        System.out.println("Pattern 7 : ");
+        pattern_7(5);
+        System.out.println(".............................................");
+        System.out.println("Pattern 8 : ");
+        pattern_8(2);
         System.out.println(".............................................");
     }
 }
